@@ -1,39 +1,75 @@
-# dia1-git-profesional - Reto 90 días Backend con IA
+# dia1-git-profesional -> Backend API Node.js
 
-Repositorio del reto de 90 días para convertirme en Backend Developer con IA. Documentando de 0 a empleable.
+Proyecto que empezo como practica de Git profesional y evoluciono a API REST con Node.js + Express. Enfoque 100% buenas practicas: conventional commits, env protection, arquitectura modular.
 
-## Roadmap de aprendizaje
+## Stack Dia 6
+- Node.js v24.14.1
+- Express 5.x
+- dotenv
+- Git flow pro (stash, revert, cherry-pick, merge conflicts)
 
-### Día 1 - Fundamentos Git
-- Las 3 zonas: Working Directory, Staging Area, Repository
-- Configuración profesional en Windows y fix error 403 por credenciales
-- Flujo base con Conventional Commits
+## Timeline
+- **Dia 1-3:** Git basico, ramas, PRs, conflictos
+- **Dia 4:** Advanced - stash, revert, .env protection
+- **Dia 5:** Init Node backend, Express server, dotenv, 200 OK
+- **Dia 6:** CRUD Users - separacion app/server, routes, controllers, data en memoria
 
-### Día 2 - Repo profesional en la nube
-- Conexión local -> GitHub con `remote`, `push -u origin main`
-- README profesional con Markdown
-- Historial limpio y sincronizado `main` <-> `origin/main`
+## Estructura
+src/
+app.js -> config express, middlewares, routes
+server.js -> solo levanta el puerto
+data.js -> data en memoria (pre-DB)
+routes/
+users.routes.js -> /api/users
+controllers/
+users.controller.js -> logica CRUD
 
-### Día 3 - Trabajo en equipo real
-- GitHub Flow: `main` estable, `feature/*` para desarrollar
-- Primer Pull Request #1: `feature/add-gitignore` -> `main`
-- Merge commits y resolución de conflictos (`both modified`)
-- Limpieza de ramas mergeadas
+## API Endpoints - Dia 6
 
-## Comandos dominados
-```bash
-git init / clone
-git add / commit -m "feat: ..."
-git status / log --oneline --graph --all
-git branch / switch -c feature/nombre / merge
-git remote add origin / push -u origin main
-git pull / stash / revert 
+| Metodo | Ruta | Descripcion | Body |
+|---|---|---|---|
+| GET | / | Health root | - |
+| GET | /health | Uptime | - |
+| GET | /api/users | Lista todos | - |
+| GET | /api/users/:id | Obtiene 1 usuario | - |
+| POST | /api/users | Crea usuario | {name, email} |
+| DELETE | /api/users/:id | Elimina usuario | - |
 
-Stack objetivo 30 días
-Node.js, Express, PostgreSQL, Git/GitHub, IA para desarrollo
+### Ejemplo
 
-🚀 Repo en vivo 
-https://github.com/Camiloo92/dia1-git-profesional
+\\\ash
+GET http://localhost:3000/api/users
+-> [{id:1, name:"Ivan", email:"ivan@test.com"}]
 
-👤 Autor
-Iván Casallas - ADSO SENA | Backend Developer en formación | Enfocado en Node.js e IA
+POST http://localhost:3000/api/users
+Body: {"name":"Camilo","email":"camilo@test.com"}
+-> 201 Created
+\\\
+
+## Como correr
+
+\\\powershell
+# Clonar
+git clone https://github.com/Camiloo92/dia1-git-profesional.git
+cd dia1-git-profesional
+
+# Env
+copy .env.example .env
+# edita PORT=3000
+
+# Instalar y correr
+npm install
+npm run dev
+# -> http://localhost:3000
+\\\
+
+## Seguridad
+- \.env\ nunca se commitea (verificado con git status)
+- \.env.example\ si se commitea para onboarding
+
+## Siguiente - Dia 7
+- Middleware de validacion y error handler global
+- Preparacion para MongoDB / persistencia real
+- Tests con Thunder Client
+
+Autor: Ivan Del Carpo Calle (@Camiloo92) - Bogota, Colombia
